@@ -1,13 +1,13 @@
 ﻿namespace AvatarGenerator.App;
 
-public sealed class FakeFaceScraper
+public sealed class Scraper
 {
     private const string BaseUrl = "https://this-person-does-not-exist.com/en";
     private readonly IWebDriverFactory _webDriverFactory;
     private IWebDriver _webDriver = null!;
     private IJavaScriptExecutor _javaScriptExecutor = null!;
     private const string GeneratedPath = "generated";
-    public FakeFaceScraper(IWebDriverFactory webDriverFactory)
+    public Scraper(IWebDriverFactory webDriverFactory)
     {
         _webDriverFactory = webDriverFactory;
         Directory.CreateDirectory(GeneratedPath);

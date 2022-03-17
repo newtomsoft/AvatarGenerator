@@ -1,30 +1,29 @@
 ﻿namespace AvatarGenerator.App;
 
-public class FakeFaceApplication
+public class AvatarGeneratorApplication
 {
     private readonly IWebDriverFactory _webDriverFactory;
 
-    public FakeFaceApplication(IWebDriverFactory webDriverFactory)
+    public AvatarGeneratorApplication(IWebDriverFactory webDriverFactory)
     {
         _webDriverFactory = webDriverFactory;
     }
 
     public async Task Run(int gamesNumber)
     {
-        var scraper = new FakeFaceScraper(_webDriverFactory);
+        var scraper = new Scraper(_webDriverFactory);
         scraper.BeginScraping();
         await GetFaces(scraper, gamesNumber);
         scraper.CloseBrowser(TimeSpan.FromMilliseconds(800));
     }
 
-    private static async Task GetFaces(FakeFaceScraper fakeFaceScraper, int gamesNumber)
+    private static async Task GetFaces(Scraper scraper, int gamesNumber)
     {
-        fakeFaceScraper.GoToHomePage();
-        fakeFaceScraper.CleanWindow();
-
+        scraper.GoToHomePage();
+        scraper.CleanWindow();
         for (var i = 0; i < gamesNumber; i++)
         {
-            await fakeFaceScraper.GetFace();
+            await scraper.GetFace();
             await Task.Delay(Random.Shared.Next(1500, 2200));
         }
     }

@@ -3,7 +3,7 @@ var host = hostBuilder
     .ConfigureServices((_, services) =>
     {
         services.AddOptions();
-        services.AddSingleton<FakeFaceApplication>();
+        services.AddSingleton<AvatarGeneratorApplication>();
         services.AddSingleton<IWebDriverFactory, FirefoxDriverFactory>();
     })
     .UseConsoleLifetime()
@@ -11,7 +11,7 @@ var host = hostBuilder
 
 using var serviceScope = host.Services.CreateScope();
 var services = serviceScope.ServiceProvider;
-var application = services.GetRequiredService<FakeFaceApplication>();
+var application = services.GetRequiredService<AvatarGeneratorApplication>();
 
 await application.Run(RequestFacesNumber());
 
